@@ -50,8 +50,10 @@ python3 main.py
    点击 `project setup`，选择 `set up my own Development Container`
    ![alt text](image/README/1.png)
    将环境改为python3
-   ![alt text](image/README/2.png)
-   命令为
+
+   ![1715334204900](image/README/1715334204900.png)
+
+   部署命令为
    `bash start.sh`
 
 ![alt text](image/README/3.png)
