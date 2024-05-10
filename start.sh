@@ -8,21 +8,21 @@ echo "开始启动项目"
 nohup python3 main.py &
 echo "项目已启动"
 
-if [ ! -f /app/cf_zero_status.txt ]
+if [ ! -f app/cf_zero_status.txt ]
 then
     cd app
     touch cf_zero_status.txt
     echo "0" > cf_zero_status.txt
     cd ..
 fi
-$CF_ZERO_STATUS=$(cat /app/cf_zero_status.txt)
+$CF_ZERO_STATUS=$(cat app/cf_zero_status.txt)
 if [$CF_ZERO_TOKEN != NULL && $CF_ZERO_STATUS != 1 ]
 then
     echo "开始Cloudflare Zero Trust部署"
-    if[! -f /app/cloudflared ]
+    if[! -f app/cloudflared ]
     then
         wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /app/cloudflared
-        chmod +x /app/cloudflared
+        chmod +x app/cloudflared
     fi
     cd app/
     ./cloudflared service install $CF_ZERO_TOKEN
