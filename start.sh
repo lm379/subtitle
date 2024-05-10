@@ -16,10 +16,10 @@ then
     cd ..
 fi
 CF_ZERO_STATUS=$(cat app/cf_zero_status.txt)
-if [ ! -z $CF_ZERO_TOKEN && $CF_ZERO_STATUS != 1 ]
+if [ ! -z $CF_ZERO_TOKEN ] && [$CF_ZERO_STATUS != 1 ]
 then
     echo "开始Cloudflare Zero Trust部署"
-    if[! -f app/cloudflared ]
+    if [! -f app/cloudflared ]
     then
         wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O app/cloudflared
         chmod +x app/cloudflared
