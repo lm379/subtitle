@@ -15,20 +15,20 @@ then
     echo "0" > cf_zero_status.txt
     cd ..
 fi
-$CF_ZERO_STATUS=$(cat app/cf_zero_status.txt)
-if [$CF_ZERO_TOKEN != NULL && $CF_ZERO_STATUS != 1 ]
+CF_ZERO_STATUS=$(cat app/cf_zero_status.txt)
+if [ ! -z $CF_ZERO_TOKEN && $CF_ZERO_STATUS != 1 ]
 then
     echo "开始Cloudflare Zero Trust部署"
     if[! -f app/cloudflared ]
     then
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O /app/cloudflared
+        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O app/cloudflared
         chmod +x app/cloudflared
     fi
     cd app/
     ./cloudflared service install $CF_ZERO_TOKEN
     echo "1" > cf_zero_status.txt
     echo "Cloudflare Zero Trust部署完成"
-elif [$CF_ZERO_STATUS == "1"]
+elif [ $CF_ZERO_STATUS == 1 ]
 then
     echo "Cloudflare Zero Trust已部署，跳过部署"
 else
