@@ -19,7 +19,9 @@
 
 ![1718706674907](image/README/1718706674907.png)
 
-4. 访问http://127.0.0.1:9999/或者http://{ip}:9999/ 出现success即可
+4. 出现success即可
+   
+![1718709174622](image/README/1718709174622.png)
    
 5. 修改Bilibili_Config.json中下面server字段为你在Vercel中设置的域名
 
