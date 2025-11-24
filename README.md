@@ -1,16 +1,46 @@
 ## 说明
 
-本项目代码来自大佬[chen310](https://github.com/chen310)的replit库
+本仓库代码来自大佬[chen310](https://github.com/chen310)的replit库  
 当你看见本项目时，我默认你已经安装好了BilibiliPotplayer插件，如何安装请访问[原项目](https://github.com/chen310/BilibiliPotPlayer)
 
 ## 实现功能
 
-为项目[BilibiliPotPlayer](https://github.com/chen310/BilibiliPotPlayer)实现弹幕功能
-由于大佬提供的replit失效，vercel部署后不绑定自定义域名在境内无法访问， 但是绑定域名就可以了，因此可以通过本项目自行部署弹幕代理服务
+为项目[BilibiliPotPlayer](https://github.com/chen310/BilibiliPotPlayer)实现弹幕功能     
+通过本项目自行部署弹幕代理服务   
 
 ## 部署教程
 
-### 部署到vercel
+### 部署到Zeabur
+
+[注册链接](https://zeabur.com/referral?referralCode=lm379)
+
+进控制台随便选一个可用区域，输入选择Docker部署，输入镜像 `ghcr.io/lm379/subtitle:latest` 并设置暴露端口 `9999`
+
+![alt text](image/README/zeabur.png)
+
+等部署完成后，点击网络，添加一个公网访问，可以直接生成域名，或使用自己的域名
+
+![alt text](image/README/zeabur2.png)
+
+访问域名出现success即部署成功
+
+修改Bilibili_Config.json中下面server字段为你在Zeabur中设置的域名
+
+修改前：
+
+```json
+ "server": "https://subtitle.chen310.repl.co"
+```
+
+修改后：
+
+```json
+ "server": "https://xxxx.zeabur.app"
+```
+
+### 部署到Vercel
+
+#### 一键部署
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/lm379/subtitle)
 
@@ -46,33 +76,26 @@
 
 #### 自定义域名
 
-vercel默认域名境内无法直接访问，请前往 `Settings`-`domains`添加一个自定义域名，DNS服务商使用Cloudflare的记得关闭小云朵
+vercel默认域名境内无法直接访问，请前往 `Settings` - `domains`添加一个自定义域名，DNS服务商使用Cloudflare的记得关闭小云朵
 
-当出现访问你的域名出现 `success`即可
+当出现访问你的域名出现 `success` 即可
 
 若你没有域名，可以直接使用我提供的 `https://subtitle.lm379.gq`
 
-### 本地或服务器部署
+### 本地或服务器部署(Docker)
 
-1. 安装Python3
-
-> 如何安装请自行移步[这里](https://www.runoob.com/python3/python3-install.html)
-
-2. 拉取源码
-
+1. 输入命令
 ```
-git clone https://github.com/lm379/subtitle.git
-```
-
-3. 安装依赖 `pip3 install -r requirements.txt`
-4. 运行
-
-```bash
-python3 main.py
+docker pull ghcr.io/lm379/subtitle:latest
+docker run -d \
+  --name subtitle \
+  -p 9999:9999 \
+  --restart=always \
+  ghcr.io/lm379/subtitle:latest
 ```
 
-4. 测试：访问http://127.0.0.1:9999/或者http://{ip}:9999/ 出现success即可
-5. 修改Bilibili_Config.json中下面server字段为你的代理地址
+2. 测试：访问http://127.0.0.1:9999/或者http://{ip}:9999/ 出现success即可    
+3. 修改Bilibili_Config.json中下面server字段为你的代理地址   
    修改前：
 
 ```json
@@ -85,6 +108,6 @@ python3 main.py
  "server": "http://127.0.0.1:9999"
 ```
 
-6. 重启Potplayer
+4. 重启Potplayer
 
 ---
