@@ -1,0 +1,7 @@
+{
+  "name": "subtitle",
+  "buildCommand": "pnpm run build",
+  "installCommand": "pnpm install",
+  "outputDirectory": "./next",
+  "nodeVersion": "22.17.1"
+}
